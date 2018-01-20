@@ -35,16 +35,16 @@ public class ExecutorService extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String requestLanguageType = request.getParameter("languageType");
+		Language requestLanguageType = Language.valueOf(request.getParameter("languageType"));
 		String requestProgramFilePath = request.getParameter("programFilePath");
 		System.out.println(requestLanguageType + " &" + requestProgramFilePath);
 		String output = "";
 		switch(requestLanguageType) {
-			case "JAVA":
+			case JAVA:
 				output = ProgramExecutorFactory.getIExecutor(Language.JAVA).execute(new File(requestProgramFilePath));
 				System.out.println(output);
 				break;
-			case "PYTHON":
+			case PYTHON:
 				output = ProgramExecutorFactory.getIExecutor(Language.PYTHON).execute(new File(requestProgramFilePath));
 				break;
 			default:
