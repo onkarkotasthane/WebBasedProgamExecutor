@@ -65,7 +65,7 @@ sourceFile : FILE
 
 	<form method="POST"
 		action="http://localhost:8082/WebBasedProgamExecutor/ExecutorServiceFile"
-		enctype="multipart/form-data">
+		enctype="multipart/form-data" target="output">
 		<table>
 			<tr>
 				<td>sourceFile:</td>
@@ -81,5 +81,12 @@ sourceFile : FILE
 			</tr>
 		</table>
 	</form>
+	<table>
+		<tr>
+			<td>Output:</td>
+			<td><iframe width="500" height="200" name="output">
+					<p>Your browser does not support iframes.</p>
+				</iframe></td>
+		</tr>
 </body>
 </html>
