@@ -5,9 +5,33 @@
 <title>Insert title here</title>
 </head>
 <body>
-<p >App started</p>
-<p>Hit the url with 'languageType' ("JAVA", "PYTHON") & 'programFilePath'</p>
-<p>Ex. /WebBasedProgamExecutor/ExecutorService?languageType=JAVA&programFilePath=E:\Application.java</p>
+<p style="color:green;">API Status : <b>Ready!</b></p>
+<pre>
+POST application/json
+/WebBasedProgamExecutor/ExecutorService
+</pre>
+<hr>
+<p>Python Request Example</p>
+
+<pre>
+{
+	"languageType" : "PYTHON",
+	"inputType" : "SOURCE",
+	"input" : "print(\"hello world from Python!\", (10+20));"
+}
+</pre>
+<hr>
+
+Java Request Example
+<pre>
+{
+	"languageType" : "JAVA",
+	"inputType" : "SOURCE",
+	"input" : "public class Application {\r\n\r\npublic static void main(String args[]) {\r\nSystem.out.println(\"Hello from Java!\");\r\n}\r\n}",
+	"class" : "Application"
+}
+</pre>
+
 
 </body>
 </html>

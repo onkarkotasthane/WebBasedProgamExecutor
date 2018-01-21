@@ -4,18 +4,26 @@ import java.io.File;
 
 /**
  * @author Onkar
- *
+ * @date 2018
  */
 public interface IExecutor {
 
 	/**
-	 * PROGRAM EXECUTION THROUGH DIRECT SOURCE CODE
-	 * */
+	 * @param programCode
+	 * @return
+	 */
 	String execute(String programCode);
 
 	/**
-	 * PROGRAM EXECUTION THROUGH SOURCE CODE FILE
-	 * */
+	 * @param programFile
+	 * @return
+	 */
 	String execute(File programFile);
+
+	/**
+	 * @param entryClass
+	 * @return
+	 */
+	IExecutor entryClass(String entryClass);
 
 }
