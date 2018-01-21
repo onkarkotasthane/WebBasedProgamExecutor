@@ -51,6 +51,7 @@ public class PythonIExecutor implements IExecutor {
 		try {
 			// EXECUTE PROGRAM
 			Process process = runtime.exec("python " + programFilePath);
+			programOutput += "> EXECUTING" + System.lineSeparator();
 			programOutput += programExecutionDetails.show(Language.PYTHON, process);
 		} catch (IOException e) {
 			programOutput += "Server execution error";

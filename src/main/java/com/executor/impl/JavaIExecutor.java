@@ -56,12 +56,12 @@ public class JavaIExecutor implements IExecutor {
 		try {
 			// COMPILE PROGRAM
 			Process process = runtime.exec("javac " + programFilePath);
-			System.out.println("> COMPILE PROGRAM");
+			programOutput += "> COMPILE PROGRAM" + System.lineSeparator();
 			programOutput += programExecutionDetails.show(Language.JAVA, process);
 
 			// EXECUTE PROGRAM
-			System.out.println("> EXECUTE PROGRAM");
 			process = runtime.exec("java -cp " + classPath + " " + classFile);
+			programOutput += "> EXECUTE PROGRAM" + System.lineSeparator();
 			programOutput += programExecutionDetails.show(Language.JAVA, process);
 
 		} catch (IOException e) {

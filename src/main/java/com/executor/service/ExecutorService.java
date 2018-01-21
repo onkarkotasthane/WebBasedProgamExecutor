@@ -11,9 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.executor.factory.ProgramExecutorFactory;
-import com.reference.Input;
 import com.reference.Language;
 
 /**
@@ -22,54 +23,66 @@ import com.reference.Language;
  */
 @Controller
 public class ExecutorService {
+
+	/**
+	 * @param sourceFile
+	 * @param requestData
+	 * @param httpServletRequest
+	 * @param httpServletResponse
+	 * @throws IOException
+	 */
+	@RequestMapping(path = "ExecutorServiceFile", method = RequestMethod.POST, consumes = { "multipart/form-data" })
+	public void executorServiceFile(@RequestPart MultipartFile sourceFile, @RequestPart String requestData, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException {
+
+		// SAVE FILE
+		File file = new File("E:\\" + sourceFile.getOriginalFilename());
+		sourceFile.transferTo(file);
+
+		JSONObject requestJsonData = new JSONObject(requestData);
+		// LANGUAGE TYPE
+		Language requestLanguageType = Language.valueOf(requestJsonData.getString("languageType"));
+
+		String output = "";
+		switch (requestLanguageType) {
+			case JAVA:
+				output = ProgramExecutorFactory.getIExecutor(Language.JAVA).execute(file);
+				break;
+			case PYTHON:
+				output = ProgramExecutorFactory.getIExecutor(Language.PYTHON).execute(file);
+				break;
+			default:
+				output = "- Wrong request -";
+		}
+		httpServletResponse.getWriter().append(output);
+	}
+
 	/**
 	 * @param requestData
 	 * @param httpServletRequest
 	 * @param httpServletResponse
 	 * @throws IOException
 	 */
-	@RequestMapping(path = "ExecutorService", method = RequestMethod.POST, consumes = "application/json")
-	public void executorService(@RequestBody String requestData, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException {
+	@RequestMapping(path = "ExecutorServiceSource", method = RequestMethod.POST, consumes = "application/json")
+	public void executorServiceSource(@RequestBody String requestData, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException {
 
 		JSONObject requestJsonData = new JSONObject(requestData);
 
 		// LANGUAGE TYPE
 		Language requestLanguageType = Language.valueOf(requestJsonData.getString("languageType"));
 
-		// Source or file
-		Input requestInputType = Input.valueOf(requestJsonData.getString("inputType"));
-
 		// SOURCE Data/ FILE
 		String requestInput = requestJsonData.getString("input");
 
 		String output = "";
 		switch (requestLanguageType) {
-		case JAVA:
-			switch (requestInputType) {
-			case SOURCE:
+			case JAVA:
 				output = ProgramExecutorFactory.getIExecutor(Language.JAVA).entryClass(requestJsonData.getString("class")).execute(requestInput);
 				break;
-			case FILE_PATH:
-				output = ProgramExecutorFactory.getIExecutor(Language.JAVA).execute(new File(requestInput));
-				break;
-			default:
-				break;
-			}
-			break;
-		case PYTHON:
-			switch (requestInputType) {
-			case SOURCE:
+			case PYTHON:
 				output = ProgramExecutorFactory.getIExecutor(Language.PYTHON).execute(requestInput);
 				break;
-			case FILE_PATH:
-				output = ProgramExecutorFactory.getIExecutor(Language.PYTHON).execute(new File(requestInput));
-				break;
 			default:
-				break;
-			}
-			break;
-		default:
-			output = "- Wrong request -";
+				output = "- Wrong request -";
 		}
 		httpServletResponse.getWriter().append(output);
 	}

@@ -25,12 +25,11 @@ public class ExecutionInfo {
 		try {
 			BufferedReader executionOutputStream = new BufferedReader(new InputStreamReader(process.getInputStream()));
 			BufferedReader executionErroStream = new BufferedReader(new InputStreamReader(process.getErrorStream()));
-			executionOutput += "Excecuting " + language.toString() + System.lineSeparator();
 
 			/*
 			 * PRINTING PROGRAM COMPILATION/EXECUTION OUTPUT
 			 */
-			executionOutput += "Output:" + System.lineSeparator();
+			executionOutput += "Output: " + System.lineSeparator();
 			String s = null;
 			while ((s = executionOutputStream.readLine()) != null) {
 				// System.out.println(s);
