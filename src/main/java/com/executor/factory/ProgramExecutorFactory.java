@@ -1,4 +1,4 @@
-package com.executor.factor;
+package com.executor.factory;
 
 import com.executor.IExecutor;
 import com.executor.impl.JavaIExecutor;

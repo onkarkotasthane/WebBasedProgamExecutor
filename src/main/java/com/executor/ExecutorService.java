@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.executor.factor.ProgramExecutorFactory;
+import com.executor.factory.ProgramExecutorFactory;
 import com.reference.Input;
 import com.reference.Language;
 
