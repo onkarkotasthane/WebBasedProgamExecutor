@@ -29,7 +29,7 @@ public class ExecutorService {
 	 * @throws IOException
 	 */
 	@RequestMapping(path = "ExecutorService", method = RequestMethod.POST, consumes = "application/json")
-	public void greet(@RequestBody String requestData, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException {
+	public void executorService(@RequestBody String requestData, HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws IOException {
 
 		JSONObject requestJsonData = new JSONObject(requestData);
 
