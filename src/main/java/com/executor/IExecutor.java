@@ -21,7 +21,7 @@ public interface IExecutor {
 	String execute(File programFile);
 
 	/**
-	 * @param entryClass
+	 * @param entryClass (class from where program execution will start)
 	 * @return
 	 */
 	IExecutor entryClass(String entryClass);
